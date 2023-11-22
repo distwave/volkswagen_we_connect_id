@@ -29,7 +29,7 @@ PLATFORMS = [
 
 _LOGGER = logging.getLogger(__name__)
 
-SUPPORTED_VEHICLES = ["ID.3", "ID.4", "ID.5", "ID. Buzz"]
+SUPPORTED_VEHICLES = ["ID.3", "ID.4", "ID.5", "ID. Buzz", "e-Golf"]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -67,7 +67,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER,
         name=DOMAIN,
         update_method=async_update_data,
-        update_interval=timedelta(seconds=45),
+        update_interval=timedelta(seconds=120),
     )
 
     hass.data.setdefault(DOMAIN, {})
