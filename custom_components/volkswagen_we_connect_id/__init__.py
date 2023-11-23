@@ -29,8 +29,6 @@ PLATFORMS = [
 
 _LOGGER = logging.getLogger(__name__)
 
-SUPPORTED_VEHICLES = ["ID.3", "ID.4", "ID.5", "ID. Buzz", "e-Golf"]
-
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up Volkswagen We Connect ID from a config entry."""
@@ -56,8 +54,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         vehicles = []
 
         for vin, vehicle in _we_connect.vehicles.items():
-            if vehicle.model.value in SUPPORTED_VEHICLES:
-                vehicles.append(vehicle)
+            vehicles.append(vehicle)
 
         hass.data[DOMAIN][entry.entry_id + "_vehicles"] = vehicles
         return vehicles
