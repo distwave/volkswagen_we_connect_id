@@ -398,7 +398,22 @@ SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
              "maintenanceStatus"
          ].oilServiceDue_km.value,
     ),
-
+    VolkswagenIdEntityDescription(
+        key="lastConnected",
+        name="Last connected",
+        icon="mdi:connection",
+        value=lambda data: data["access"][
+            "accessStatus"
+        ].carCapturedTimestamp.value,
+    ),
+    VolkswagenIdEntityDescription(
+        key="parkingTime",
+        name="Parking Time",
+        icon="mdi:parking",
+        value=lambda data: data["parking"][
+            "parkingPosition"
+        ].carCapturedTimestamp.value,
+    ),
 )
 
 VEHICLE_SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
