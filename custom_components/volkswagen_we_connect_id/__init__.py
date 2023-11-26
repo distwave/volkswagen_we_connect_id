@@ -41,6 +41,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         loginOnInit=False,
         timeout=10,
         updatePictures=False,
+        numRetries=0
     )
 
     await hass.async_add_executor_job(_we_connect.login)
@@ -64,7 +65,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER,
         name=DOMAIN,
         update_method=async_update_data,
-        update_interval=timedelta(seconds=120),
+        update_interval=timedelta(minutes=entry.data["update_interval"]),
     )
 
     hass.data.setdefault(DOMAIN, {})

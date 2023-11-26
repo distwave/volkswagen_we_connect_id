@@ -1,4 +1,4 @@
-# Volkswagen We Connect ID [ONLY FOR EUROPE]
+# Volkswagen We Connect ID [ONLY FOR EUROPE] [EXPERIMENTAL FOR NON ID VEHICLES]
 _Volkswagen We Connect ID sensor provides statistics from the Volkswagen ID Api thru [WeConnect-python lib](https://pypi.org/project/weconnect/)._
 
 **This component will set up the following platforms.**
