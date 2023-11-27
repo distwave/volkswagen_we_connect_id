@@ -4,7 +4,7 @@ from weconnect.elements.vehicle import Vehicle
 
 from homeassistant.components.button import ButtonEntity
 
-from . import get_object_value, set_ac_charging_speed, set_climatisation, start_stop_charging
+from . import force_data_refresh, get_object_value, set_ac_charging_speed, set_climatisation, start_stop_charging
 from .const import DOMAIN
 
 
@@ -20,6 +20,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         entities.append(VolkswagenIDToggleACChargeSpeed(vehicle, we_connect))
         entities.append(VolkswagenIDStartChargingButton(vehicle, we_connect))
         entities.append(VolkswagenIDStopChargingButton(vehicle, we_connect))
+        entities.append(VolkswagenIDForceDataRefreshButton(vehicle, we_connect))
 
     async_add_entities(entities)
 
@@ -56,6 +57,22 @@ class VolkswagenIDStopClimateButton(ButtonEntity):
     def press(self) -> None:
         """Handle the button press."""
         set_climatisation(self._vehicle.vin.value, self._we_connect, "stop", 0)
+
+
+class VolkswagenIDForceDataRefreshButton(ButtonEntity):
+    """Button for wake up the vehicle and force refresh data."""
+
+    def __init__(self, vehicle, we_connect) -> None:
+        """Initialize VolkswagenID vehicle sensor."""
+        self._attr_name = f"{vehicle.nickname} Force Refresh"
+        self._attr_unique_id = f"{vehicle.vin}-force_refresh"
+        self._attr_icon = "mdi:refresh"
+        self._we_connect = we_connect
+        self._vehicle = vehicle
+
+    def press(self) -> None:
+        """Handle the button press."""
+        force_data_refresh(self._vehicle.vin.value, self._we_connect)
 
 
 class VolkswagenIDToggleACChargeSpeed(ButtonEntity):

@@ -176,6 +176,22 @@ def update(
     """API call to update vehicle information."""
     api.update(updatePictures=False)
 
+
+def force_data_refresh(
+    call_data_vin, api: weconnect.WeConnect
+) -> bool:
+    """ Wakeup the vehicle to refresh data"""
+    for vin, vehicle in api.vehicles.items():
+        if vin == call_data_vin:
+            try:
+                vehicle.controls.wakeupControl.value = ControlOperation.START
+                _LOGGER.info("Sended wakeup call to the car")
+            except Exception as exc:
+                _LOGGER.error("Failed to send request to car - %s", exc)
+                return False
+    return True
+
+
 def start_stop_charging(
     call_data_vin, api: weconnect.WeConnect, operation: str
 ) -> bool:
