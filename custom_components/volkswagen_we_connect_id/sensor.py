@@ -430,6 +430,12 @@ VEHICLE_SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
         native_unit_of_measurement="l/100km",
         value=lambda vehicle: vehicle.trips["shortTerm"].averageFuelConsumption.value,
     ),
+    VolkswagenIdEntityDescription(
+        key="lastTripMileageKm",
+        name="Last Trip Mileage",
+        native_unit_of_measurement="km",
+        value=lambda vehicle: vehicle.trips["shortTerm"].mileage_km.value,
+    ),
 
 )
 
