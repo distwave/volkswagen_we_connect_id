@@ -15,12 +15,11 @@ from homeassistant.components.sensor import (
 )
 from homeassistant.const import (
     PERCENTAGE,
-    TIME_DAYS,
-    TIME_MINUTES,
     UnitOfLength,
     UnitOfPower,
     UnitOfSpeed,
     UnitOfTemperature,
+    UnitOfTime,
     UnitOfEnergy,
 )
 
@@ -60,7 +59,7 @@ SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
         key="remainingClimatisationTime_min",
         name="Remaining Climatisation Time",
         icon="mdi:fan-clock",
-        native_unit_of_measurement=TIME_MINUTES,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
         value=lambda data: data["climatisation"][
             "climatisationStatus"
         ].remainingClimatisationTime_min.value,
@@ -91,7 +90,7 @@ SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
         key="remainingChargingTimeToComplete_min",
         name="Remaining Charging Time",
         icon="mdi:battery-clock",
-        native_unit_of_measurement=TIME_MINUTES,
+        native_unit_of_measurement=UnitOfTime.MINUTES,
         value=lambda data: data["charging"][
             "chargingStatus"
         ].remainingChargingTimeToComplete_min.value,
@@ -163,7 +162,7 @@ SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
          name="Health Inspection",
          key="inspectionDue",
          icon="mdi:wrench-clock-outline",
-         native_unit_of_measurement=TIME_DAYS,
+         native_unit_of_measurement=UnitOfTime.DAYS,
          value=lambda data: data["vehicleHealthInspection"][
              "maintenanceStatus"
          ].inspectionDue_days.value,
@@ -384,7 +383,7 @@ SENSORS: tuple[VolkswagenIdEntityDescription, ...] = (
          name="Oil Inspection days",
          key="oilInspectionDue",
          icon="mdi:wrench-clock-outline",
-         native_unit_of_measurement=TIME_DAYS,
+         native_unit_of_measurement=UnitOfTime.DAYS,
          value=lambda data: data["vehicleHealthInspection"][
              "maintenanceStatus"
          ].oilServiceDue_days.value,
